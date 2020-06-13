@@ -1,27 +1,45 @@
-WIP
+# WIP
 
-Supports building on Linux x86_64
-tested with GCC 8, GCC 10, Clang 10, Clang 11 (trunk)
-ICC 19 wip
+Supports building on Linux x86_64 using cmake
 
-future plans include testing on arm 64 (aarch64) and windows using msvc/mingw/llvm
-decoupling blis/openssl/sleef into git submodules that are pulled/built if not found locally
+Tested with 
+- Linux
+    - GCC 8
+    - GCC 10
+    - Clang 10
+    - Clang 11
+    - ICC 19 *(wip)
 
-usage
-make a build folder in makec
-cd into that build folder
-run `cmake ..` and then `make`
+Future plans
+- include arm 64 (aarch64)
+- include windows using msvc/mingw/llvm
+- decoupling blis/openssl/sleef into git submodules that are pulled+built if not found locally
+
+## Usage
+
+Starting from the `jsource/makec` folder
+
+1. make a build folder in `makec`
+2. `cd` into that build folder
+3. run `cmake ..` and then `make`
+4. if no errors, run make install
+
 defaults to `j64x=j64`, can be modified using `-Dj64x=<type>` where type = j64, j64avx, j64avx2
+
 activate openmp using -DUSE_OpenMP=1
+
 activate sleef using -DUSE_SLEEF=1
+
 set compiled using CC environment variable or -DCMAKE_C_COMPILER
+
 same for CFLAGS
 
 `make install` copies jconsole, libj, libtsdll into jlibrary/bin
 test as usual with `./jconsole ../../test/tsu.ijs`
 also plan to add support for `make test` to use this and using an actual install in user folder
 
-example
+## Example
+```
 cd makec
 mkdir build
 cd build
@@ -32,5 +50,6 @@ cd ../../jlibrary/bin
 strip -s jconsole libj.so
 ./jconsole ../../test/tsu.ijs
 RUN ddall
+```
 
 if all tests pass, copy into PATH
